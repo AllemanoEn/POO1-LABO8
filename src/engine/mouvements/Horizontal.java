@@ -1,4 +1,4 @@
 package engine.mouvements;
 
-public class Horizontal {
+public class Horizontal extends Mouvements{
 }

@@ -2,12 +2,16 @@ package engine.pieces;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Case;
 
 public abstract class Pieces {
 
     PlayerColor couleur;
     PieceType type;
     int distance;
+    Case c;
+
+
 
     public Pieces (PlayerColor couleur, PieceType type, int distance){
         this.couleur = couleur;
@@ -19,12 +23,19 @@ public abstract class Pieces {
         return couleur;
     }
 
-    public PieceType type(){
+    public PieceType geType(){
         return type;
     }
 
-    public int distance(){
+    public int getDistance(){
         return distance;
     }
 
+    Case getCase(){
+        return c;
+    }
+
+    void setCase(Case c){
+        this.c = c;
+    }
 }

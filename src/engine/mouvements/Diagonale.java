@@ -1,4 +1,4 @@
 package engine.mouvements;
 
-public class Diagonale {
+public class Diagonale extends Mouvements {
 }
