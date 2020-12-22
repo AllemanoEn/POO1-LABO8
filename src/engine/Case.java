@@ -1,6 +1,7 @@
 package engine;
 import engine.pieces.Pieces;
 
+
 public class Case {
     int x;
     int y;
@@ -17,9 +18,9 @@ public class Case {
    }
 
    void addPiece(Pieces piece){
-
+        piece.set
    }
-   void remove(){
+   void removePiece(Pieces piece){
 
    }
 

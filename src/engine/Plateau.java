@@ -4,6 +4,7 @@ package engine;
 import chess.ChessController;
 import chess.ChessView;
 import chess.PlayerColor;
+import engine.pieces.Pieces;
 
 public class Plateau implements ChessController {
 
@@ -30,6 +31,14 @@ public class Plateau implements ChessController {
 
     @Override
     public boolean move(int fromX, int fromY, int toX, int toY) {
+        Case caseFrom = plateau[fromX][fromY];
+        Case caseTo = plateau[toX][toY];
+
+        Pieces p = caseFrom.getPiece();
+
+
+
+
         return false;
     }
 
