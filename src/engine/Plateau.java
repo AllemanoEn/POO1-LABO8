@@ -14,7 +14,7 @@ public class Plateau implements ChessController {
     static final int dimension = 8;
     private ChessView view;
     Case[][] plateau;
-    int turn;
+    int tour;
     boolean echec;
 
     public Plateau(){
@@ -40,7 +40,7 @@ public class Plateau implements ChessController {
             return false;
         Pieces p = caseFrom.getPiece();
 
-        if (turn % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || turn % 2 == 0 && p.getCouleur() != PlayerColor.BLACK)
+        if (tour % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || tour % 2 == 0 && p.getCouleur() != PlayerColor.BLACK)
             return false;
 
         caseFrom.removePiece();
@@ -51,14 +51,14 @@ public class Plateau implements ChessController {
         view.putPiece(p.getType(),p.getCouleur(),toX,toY);
 
 
-        ++turn;
+        ++tour;
 
         return true;
     }
 
     @Override
     public void newGame() {
-        turn = 1;
+        tour = 1;
         echec = false;
 
         for (int col = 0; col < dimension; ++col) {
