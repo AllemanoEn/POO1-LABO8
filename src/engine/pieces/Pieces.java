@@ -3,6 +3,7 @@ package engine.pieces;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
+import engine.mouvements.Mouvements;
 
 public abstract class Pieces {
 
@@ -10,13 +11,21 @@ public abstract class Pieces {
     PieceType type;
     int distance;
     Case c;
+    Mouvements[] mouvements;
+    int dernierTourDeplace;
 
 
 
-    public Pieces (PlayerColor couleur, PieceType type, int distance){
+    public Pieces (PlayerColor couleur, PieceType type, int distance, Mouvements[] mouvements){
         this.couleur = couleur;
         this.type = type;
         this.distance = distance;
+        this.mouvements = new Mouvements[mouvements.length];
+
+        for(int i = 0; i != mouvements.length; i++){
+            this.mouvements[i]=mouvements[i];
+        }
+
     }
 
     public PlayerColor getCouleur(){
