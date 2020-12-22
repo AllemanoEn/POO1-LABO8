@@ -36,11 +36,15 @@ public class Plateau implements ChessController {
     public boolean move(int fromX, int fromY, int toX, int toY) {
         Case caseFrom = plateau[fromX][fromY];
         Case caseTo = plateau[toX][toY];
-
+        if (caseFrom.isEmpty())
+            return false;
         Pieces p = caseFrom.getPiece();
 
-        //caseFrom.removePiece();
-        //caseTo.addPiece(p);
+        if (turn % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || turn % 2 == 0 && p.getCouleur() != PlayerColor.BLACK)
+            return false;
+
+        caseFrom.removePiece();
+        caseTo.addPiece(p);
 
         view.displayMessage("");
         view.removePiece(fromX,fromY);
