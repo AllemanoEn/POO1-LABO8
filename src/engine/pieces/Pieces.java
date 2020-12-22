@@ -44,7 +44,7 @@ public abstract class Pieces {
         return c;
     }
 
-    void setCase(Case c){
+    public void setCase(Case c){
         this.c = c;
     }
 }

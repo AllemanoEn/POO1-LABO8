@@ -17,11 +17,15 @@ public class Case {
         return piece == null;
    }
 
-   void addPiece(Pieces piece){
-        piece.set
+   void addPiece(Pieces p){
+        if (piece != null)
+            removePiece();
+        piece = p;
+        piece.setCase(this);
    }
    void removePiece(){
-
+        piece.setCase(null);
+        piece = null;
    }
 
    int getX(){

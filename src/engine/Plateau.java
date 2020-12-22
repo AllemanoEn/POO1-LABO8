@@ -4,7 +4,7 @@ package engine;
 import chess.ChessController;
 import chess.ChessView;
 import chess.PlayerColor;
-import engine.pieces.Pieces;
+import engine.pieces.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +38,9 @@ public class Plateau implements ChessController {
         Case caseTo = plateau[toX][toY];
 
         Pieces p = caseFrom.getPiece();
+
+        caseFrom.removePiece();
+        caseTo.addPiece(p);
 
 
 
