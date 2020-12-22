@@ -39,13 +39,17 @@ public class Plateau implements ChessController {
 
         Pieces p = caseFrom.getPiece();
 
-        caseFrom.removePiece();
-        caseTo.addPiece(p);
+        //caseFrom.removePiece();
+        //caseTo.addPiece(p);
+
+        view.displayMessage("");
+        view.removePiece(fromX,fromY);
+        view.putPiece(p.getType(),p.getCouleur(),toX,toY);
 
 
+        ++turn;
 
-
-        return false;
+        return true;
     }
 
     @Override
