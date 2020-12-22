@@ -57,12 +57,11 @@ public class Plateau implements ChessController {
         turn = 1;
         echec = false;
 
-       
-        for (int row = 0; row < dimension; ++row) {
-            for (int col = 0; col < dimension; ++col) {
-                Case caseCourrante = plateau[row][col];
+        for (int col = 0; col < dimension; ++col) {
+            for (int row = 0; row < dimension; ++row) {
+                Case caseCourrante = plateau[col][row];
                 if (!caseCourrante.isEmpty()) {
-                    plateau[row][col].removePiece();
+                    plateau[col][row].removePiece();
                 }
             }
         }
@@ -98,8 +97,8 @@ public class Plateau implements ChessController {
         for (int col = 0; col < dimension; ++col) {
             Pieces pawnWhite = new Pions(PlayerColor.WHITE);
             Pieces pawnBlack = new Pions(PlayerColor.BLACK);
-            plateau[1][col].addPiece(pawnWhite);
-            plateau[6][col].addPiece(pawnBlack);
+            plateau[col][1].addPiece(pawnWhite);
+            plateau[col][6].addPiece(pawnBlack);
 
             view.putPiece(pawnWhite.getType(), pawnWhite.getCouleur(), col, 1);
             view.putPiece(pawnBlack.getType(), pawnBlack.getCouleur(), col, 6);
@@ -109,7 +108,7 @@ public class Plateau implements ChessController {
         for (int i = 0; i < dimension; ++i) {
             Pieces p = whitePieces.get(i);
 
-            plateau[0][i].addPiece(p);
+            plateau[i][0].addPiece(p);
 
             view.putPiece(p.getType(), p.getCouleur(), i, 0);
         }
@@ -118,7 +117,7 @@ public class Plateau implements ChessController {
         for (int i = 0; i < dimension; ++i) {
             Pieces p = blackPieces.get(i);
 
-            plateau[7][i].addPiece(p);
+            plateau[i][7].addPiece(p);
 
             view.putPiece(p.getType(), p.getCouleur(), i, 7);
         }
