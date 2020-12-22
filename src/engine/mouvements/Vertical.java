@@ -19,7 +19,7 @@ public class Vertical extends Mouvements {
         if(direction == Direction.HAUT){
             ecart = toY - fromY;
             if(ecart <= distance && fromX == toX){
-                for (int i = fromY; i != toY ;++i){
+                for (int i = fromY+1; i != toY ;++i){
                     if(!plateau[fromX][i].isEmpty()){
                         return false;
                     }
@@ -28,7 +28,7 @@ public class Vertical extends Mouvements {
         } else {
             ecart = fromY - toY;
             if(ecart <= distance && fromX == toX){
-                for (int i = fromY; i != toY ;--i){
+                for (int i = fromY-1; i != toY ;--i){
                     if(!plateau[fromX][i].isEmpty()){
                         return false;
                     }
