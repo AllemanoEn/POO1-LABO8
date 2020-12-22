@@ -30,7 +30,9 @@ public abstract class Pieces {
 
     public boolean mouvementValide(Case[][] plateau, int toX, int toY){
         for (Mouvements m : mouvements){
-            //if (m.TrajectoireLibre(plateau,))
+            if (!m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
+                return false;
+            }
         }
         return true;
     }
@@ -51,11 +53,11 @@ public abstract class Pieces {
         return c;
     }
 
-    public int getX{
+    public int getX(){
         return c.getX();
     }
 
-    public int getY{
+    public int getY(){
         return c.getY();
     }
 
