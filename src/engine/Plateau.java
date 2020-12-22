@@ -1,11 +1,14 @@
 package engine;
 
 
+import chess.ChessController;
+import chess.ChessView;
 import chess.PlayerColor;
 
-public class Plateau {
+public class Plateau implements ChessController {
 
     static final int dimension = 8;
+    private ChessView view;
     Case[][] plateau;
     int turn;
     boolean echec;
@@ -19,7 +22,21 @@ public class Plateau {
         }
     }
 
+    @Override
+    public void start(ChessView view){
+        this.view = view;
+        view.startView();
+    }
 
+    @Override
+    public boolean move(int fromX, int fromY, int toX, int toY) {
+        return false;
+    }
+
+    @Override
+    public void newGame() {
+
+    }
 
 
 }
