@@ -11,15 +11,38 @@ public class Horizontal extends Mouvements{
         }
         this.direction = direction;
     }
-
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
 
-        for (int i = 0; distance != i; i++){
-            
+        int ecart;
+        boolean isOk = false;
+
+        if(direction == Direction.GAUCHE){
+            ecart = fromX - toX;
+        }
+        else{
+            ecart = toX - fromX;
         }
 
+        if (fromY == toY && ecart <= distance && ecart >= 0){
+            isOk = true;
+        }
 
+        if(isOk){
+            for (int i = 1; ecart != i; i++){
+                int colonne;
+                if(direction == Direction.GAUCHE){
+                   colonne = fromX - i ;
+                }
+                else{
+                    colonne = fromX + i ;
+                }
+                if(!plateau[colonne][fromY].isEmpty()){
+                    isOk = false;
+                    break;
+                }
+            }
+        }
 
-        return false;
+        return isOk;
     }
 }
