@@ -13,7 +13,7 @@ public class Case {
         this.y = y;
     }
 
-   boolean isEmpty(){
+   public boolean isEmpty(){
         return piece == null;
    }
 
@@ -29,12 +29,13 @@ public class Case {
         piece = null;
    }
 
-   int getX(){
+   public int getX(){
         return x;
    }
-   int getY(){
+   public int getY(){
         return y;
    }
+
    Pieces getPiece(){
         return piece;
    }

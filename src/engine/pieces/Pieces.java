@@ -28,6 +28,13 @@ public abstract class Pieces {
 
     }
 
+    public boolean mouvementValide(Case[][] plateau, int toX, int toY){
+        for (Mouvements m : mouvements){
+            //if (m.TrajectoireLibre(plateau,))
+        }
+        return true;
+    }
+
     public PlayerColor getCouleur(){
         return couleur;
     }
@@ -42,6 +49,14 @@ public abstract class Pieces {
 
     Case getCase(){
         return c;
+    }
+
+    public int getX{
+        return c.getX();
+    }
+
+    public int getY{
+        return c.getY();
     }
 
     public void setCase(Case c){

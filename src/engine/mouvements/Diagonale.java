@@ -12,7 +12,7 @@ public class Diagonale extends Mouvements {
         this.direction = direction;
     }
 
-    boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
+    public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
         return false;
     }
 }

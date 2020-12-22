@@ -43,8 +43,12 @@ public class Plateau implements ChessController {
         if (tour % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || tour % 2 == 0 && p.getCouleur() != PlayerColor.BLACK)
             return false;
 
+
+
         caseFrom.removePiece();
         caseTo.addPiece(p);
+
+
 
         view.displayMessage("");
         view.removePiece(fromX,fromY);
