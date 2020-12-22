@@ -32,7 +32,7 @@ public abstract class Pieces {
         return couleur;
     }
 
-    public PieceType geType(){
+    public PieceType getType(){
         return type;
     }
 

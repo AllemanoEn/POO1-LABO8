@@ -19,7 +19,7 @@ public class Case {
    void addPiece(Pieces piece){
 
    }
-   void remove(){
+   void removePiece(){
 
    }
 
