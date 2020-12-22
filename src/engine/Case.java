@@ -18,8 +18,9 @@ public class Case {
    }
 
    void addPiece(Pieces p){
-        if (piece != null)
+        if (piece != null){
             removePiece();
+        }
         piece = p;
         piece.setCase(this);
    }
