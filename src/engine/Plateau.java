@@ -4,7 +4,7 @@ package engine;
 import chess.ChessController;
 import chess.ChessView;
 import chess.PlayerColor;
-import engine.pieces.*;
+import engine.pieces.Pieces;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class Plateau implements ChessController {
     boolean echec;
 
     public Plateau(){
-        plateau = new Case[8][8];
+        plateau = new Case[dimension][dimension];
         for(int colonne = 0; colonne < dimension ; colonne ++){
             for(int ligne = 0; ligne < dimension ; ligne ++){
                 plateau[colonne][ligne] = new Case(colonne,ligne);
@@ -34,6 +34,14 @@ public class Plateau implements ChessController {
 
     @Override
     public boolean move(int fromX, int fromY, int toX, int toY) {
+        Case caseFrom = plateau[fromX][fromY];
+        Case caseTo = plateau[toX][toY];
+
+        Pieces p = caseFrom.getPiece();
+
+
+
+
         return false;
     }
 
