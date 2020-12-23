@@ -13,30 +13,66 @@ public class Diagonale extends Mouvements {
     }
 
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
-        int ecart;
+        int ecartX;
+        int ecartY;
+        int ecart = -1;
+        int inverseur;
+        int inverseurVertical;
         boolean isOk = false;
 
+
+
         if(direction == Direction.BAS_GAUCHE || direction == Direction.HAUT_GAUCHE){
-            ecart = fromX - toX;
+            ecartX = fromX - toX;
         }
         else{
-            ecart = toX - fromX;
+            ecartX = toX - fromX;
         }
 
-        if (fromY == toY && ecart <= distance && ecart >= 0){
+        if (direction == Direction.HAUT_GAUCHE || direction == Direction.HAUT_DROITE){
+            inverseurVertical = 1;
+        }
+        else{
+            inverseurVertical = -1;
+        }
+
+        if (playerColor == PlayerColor.WHITE){
+            inverseur = 1;
+            ecartY = (toY - fromY) * inverseurVertical;
+        }
+        else{
+            inverseur = -1;
+            ecartY = (fromY - toY) * inverseurVertical;
+        }
+
+        if(ecartX == ecartY){
+            ecart = ecartX;
+        }
+
+        if (ecart <= distance && ecart >= 0){
             isOk = true;
         }
+
+
 
         if(isOk){
             for (int i = 1; ecart != i; i++){
                 int colonne;
-                if(direction == Direction.GAUCHE){
-                    colonne = fromX - i ;
+                int ligne;
+                if(direction == Direction.HAUT_GAUCHE || direction == Direction.HAUT_DROITE){
+                    ligne = fromY + (i * inverseur);
                 }
                 else{
-                    colonne = fromX + i ;
+                    ligne = fromY - (i * inverseur);
                 }
-                if(!plateau[colonne][fromY].isEmpty()){
+                if(direction == Direction.HAUT_GAUCHE || direction == Direction.BAS_GAUCHE){
+                    colonne = fromX - i;
+                }
+                else{
+                    colonne = fromX + i;
+                }
+
+                if(!plateau[colonne][ligne].isEmpty()){
                     isOk = false;
                     break;
                 }
