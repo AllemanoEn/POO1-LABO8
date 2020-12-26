@@ -21,8 +21,8 @@ public class Plateau implements ChessController {
 
     public Plateau(){
         plateau = new Case[dimension][dimension];
-        for(int colonne = 0; colonne < dimension ; colonne ++){
-            for(int ligne = 0; ligne < dimension ; ligne ++){
+        for(int colonne = 0; colonne < dimension; colonne ++){
+            for(int ligne = 0; ligne < dimension; ligne ++){
                 plateau[colonne][ligne] = new Case(colonne,ligne);
             }
         }
@@ -63,6 +63,13 @@ public class Plateau implements ChessController {
         caseFrom.removePiece();
         caseTo.addPiece(p);
 
+        //ça fait des choses bizzares mais c'est normal je crois
+
+        if(Echec(couleurAdversaire((p.getCouleur())))){
+            caseTo.removePiece();
+            caseFrom.addPiece(p);
+            return false;
+        }
 
 
         view.displayMessage("");

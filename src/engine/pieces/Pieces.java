@@ -21,6 +21,7 @@ public abstract class Pieces {
         this.type = type;
         this.distance = distance;
         this.mouvements = new Mouvements[mouvements.length];
+        dernierTourDeplace = 0;
 
         for(int i = 0; i != mouvements.length; i++){
             this.mouvements[i]=mouvements[i];
@@ -29,12 +30,15 @@ public abstract class Pieces {
     }
 
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+        if (getCase() == null){
+            return TypeMouvement.INTERDIT;
+        }
         for (Mouvements m : mouvements){
-            if (!m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
-                return TypeMouvement.INTERDIT;
+            if (m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
+                return TypeMouvement.CLASSIC;
             }
         }
-        return TypeMouvement.CLASSIC;
+        return TypeMouvement.INTERDIT;
     }
 
     public PlayerColor getCouleur(){

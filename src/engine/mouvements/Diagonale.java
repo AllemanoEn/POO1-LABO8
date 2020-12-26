@@ -13,6 +13,8 @@ public class Diagonale extends Mouvements {
     }
 
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
+
+
         int ecartX;
         int ecartY;
         int ecart = -1;
