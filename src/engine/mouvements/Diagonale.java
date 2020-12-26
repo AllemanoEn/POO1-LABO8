@@ -21,7 +21,6 @@ public class Diagonale extends Mouvements {
         boolean isOk = false;
 
 
-
         if(direction == Direction.BAS_GAUCHE || direction == Direction.HAUT_GAUCHE){
             ecartX = fromX - toX;
         }
@@ -53,25 +52,23 @@ public class Diagonale extends Mouvements {
             isOk = true;
         }
 
-
-
         if(isOk){
             for (int i = 1; ecart != i; i++){
                 int colonne;
                 int ligne;
-                if(direction == Direction.HAUT_GAUCHE || direction == Direction.HAUT_DROITE){
-                    ligne = fromY + (i * inverseur);
-                }
-                else{
-                    ligne = fromY - (i * inverseur);
-                }
+
                 if(direction == Direction.HAUT_GAUCHE || direction == Direction.BAS_GAUCHE){
                     colonne = fromX - i;
                 }
                 else{
                     colonne = fromX + i;
                 }
-
+                if(direction == Direction.HAUT_GAUCHE || direction == Direction.HAUT_DROITE){
+                    ligne = fromY + (i * inverseur);
+                }
+                else{
+                    ligne = fromY - (i * inverseur);
+                }
                 if(!plateau[colonne][ligne].isEmpty()){
                     isOk = false;
                     break;
@@ -80,5 +77,6 @@ public class Diagonale extends Mouvements {
         }
 
         return isOk;
+
     }
 }

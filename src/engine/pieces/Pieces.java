@@ -28,13 +28,13 @@ public abstract class Pieces {
 
     }
 
-    public boolean mouvementValide(Case[][] plateau, int toX, int toY){
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
         for (Mouvements m : mouvements){
             if (!m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
-                return false;
+                return TypeMouvement.INTERDIT;
             }
         }
-        return true;
+        return TypeMouvement.CLASSIC;
     }
 
     public PlayerColor getCouleur(){

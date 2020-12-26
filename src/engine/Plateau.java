@@ -16,6 +16,8 @@ public class Plateau implements ChessController {
     Case[][] plateau;
     int tour;
     boolean echec;
+    Pieces roiBlanc;
+    Pieces roiNoir;
 
     public Plateau(){
         plateau = new Case[dimension][dimension];
@@ -36,16 +38,27 @@ public class Plateau implements ChessController {
     public boolean move(int fromX, int fromY, int toX, int toY) {
         Case caseFrom = plateau[fromX][fromY];
         Case caseTo = plateau[toX][toY];
-        if (caseFrom.isEmpty())
+
+
+        if(echec){
+            view.displayMessage("Echec");
+        }
+
+        if (caseFrom.isEmpty()){
             return false;
+        }
+
         Pieces p = caseFrom.getPiece();
 
-        if (tour % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || tour % 2 == 0 && p.getCouleur() != PlayerColor.BLACK)
+        if (tour % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || tour % 2 == 0 && p.getCouleur() != PlayerColor.BLACK){
             return false;
+        }
 
-        boolean test = p.mouvementValide(plateau,toX,toY);
-        if (!test)
+
+        TypeMouvement test = p.mouvementValide(plateau,toX,toY);
+        if ( test == TypeMouvement.INTERDIT){
             return false;
+        }
 
         caseFrom.removePiece();
         caseTo.addPiece(p);
@@ -62,6 +75,39 @@ public class Plateau implements ChessController {
         return true;
     }
 
+
+    boolean Echec(PlayerColor couleurAdversaire){
+        Pieces roi;
+        if (couleurAdversaire == PlayerColor.WHITE){
+            roi = roiNoir;
+        }
+        else {
+            roi = roiBlanc;
+        }
+        for(int i = 0; i < dimension; i++){
+            for(int j = 0; j < dimension; j++){
+                Case caseActuelle = plateau[i][j];
+
+                if (caseActuelle.isEmpty() ||caseActuelle.getPiece().getCouleur() == roi.getCouleur()){
+                    continue;
+                }
+                if (caseActuelle.getPiece().mouvementValide(plateau,roi.getX(),roi.getY()) != TypeMouvement.INTERDIT){
+                    echec = true;
+                }
+            }
+        }
+
+        return echec;
+    }
+
+    PlayerColor couleurAdversaire(PlayerColor couleur){
+        if (couleur == PlayerColor.WHITE){
+            return PlayerColor.BLACK;
+        }
+        return PlayerColor.WHITE;
+    }
+
+
     @Override
     public void newGame() {
         tour = 1;
@@ -76,6 +122,8 @@ public class Plateau implements ChessController {
             }
         }
 
+        roiBlanc = new Roi(PlayerColor.WHITE);
+        roiNoir = new Roi(PlayerColor.BLACK);
 
         ArrayList<Pieces> whitePieces = new ArrayList<>(
                 Arrays.asList(
@@ -83,7 +131,7 @@ public class Plateau implements ChessController {
                         new Cavaliers(PlayerColor.WHITE),
                         new Fous(PlayerColor.WHITE),
                         new Dame(PlayerColor.WHITE),
-                        new Roi(PlayerColor.WHITE),
+                        roiBlanc,
                         new Fous(PlayerColor.WHITE),
                         new Cavaliers(PlayerColor.WHITE),
                         new Tours(PlayerColor.WHITE)
@@ -97,7 +145,7 @@ public class Plateau implements ChessController {
                         new Cavaliers(PlayerColor.BLACK),
                         new Fous(PlayerColor.BLACK),
                         new Dame(PlayerColor.BLACK),
-                        new Roi(PlayerColor.BLACK),
+                        roiNoir,
                         new Fous(PlayerColor.BLACK),
                         new Cavaliers(PlayerColor.BLACK),
                         new Tours(PlayerColor.BLACK)
