@@ -3,6 +3,8 @@ package engine.mouvements;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
+import engine.pieces.Pieces;
+import engine.pieces.Pions;
 
 public class Vertical extends Mouvements {
 
@@ -40,6 +42,14 @@ public class Vertical extends Mouvements {
         if(direction == Direction.HAUT && plateau[fromX][fromY].getPiece().getType() == PieceType.PAWN && !plateau[toX][toY].isEmpty()){
             return false;
         }
+
+        /*if(direction == Direction.HAUT && plateau[fromX][fromY].getPiece().getType() == PieceType.PAWN && toY-fromY != 0) {
+            Pions p = (Pions) plateau[fromX][fromY].getPiece();
+            if(!p.getFirstMove()){
+                p.setFirstMoveFalse();
+                return false;
+            }
+        }*/
 
         if(isOk){
             for (int i = 1; ecart != i; i++){

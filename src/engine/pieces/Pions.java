@@ -9,8 +9,10 @@ import engine.mouvements.Vertical;
 
 public class Pions extends Pieces {
 
+    boolean firstMove = true;
+
     public Pions(PlayerColor couleur) {
-        super(couleur, PieceType.PAWN, 1, new Mouvements[]{new Vertical(Direction.HAUT),
+        super(couleur, PieceType.PAWN, 2, new Mouvements[]{new Vertical(Direction.HAUT),
                 new Diagonale(Direction.HAUT_DROITE),
                 new Diagonale(Direction.HAUT_GAUCHE)
                 });
@@ -18,5 +20,13 @@ public class Pions extends Pieces {
 
     public String toString(){
         return "Pions";
+    }
+
+    public boolean getFirstMove(){
+        return firstMove;
+    }
+
+    public void setFirstMoveFalse(){
+        firstMove = false;
     }
 }
