@@ -1,5 +1,6 @@
 package engine.mouvements;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
 
@@ -52,6 +53,10 @@ public class Diagonale extends Mouvements {
 
         if (ecart <= distance && ecart >= 0){
             isOk = true;
+        }
+
+        if((direction == Direction.HAUT_GAUCHE || direction == Direction.HAUT_DROITE) && plateau[fromX][fromY].getPiece().getType() == PieceType.PAWN && plateau[toX][toY].isEmpty()){
+            return false;
         }
 
         if(isOk){

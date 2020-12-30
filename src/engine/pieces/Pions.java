@@ -10,9 +10,9 @@ import engine.mouvements.Vertical;
 public class Pions extends Pieces {
 
     public Pions(PlayerColor couleur) {
-        super(couleur, PieceType.PAWN, 1, new Mouvements[]{new Vertical(Direction.HAUT)
-                //new Diagonale(Direction.HAUT_DROITE),
-                //new Diagonale(Direction.HAUT_GAUCHE)
+        super(couleur, PieceType.PAWN, 1, new Mouvements[]{new Vertical(Direction.HAUT),
+                new Diagonale(Direction.HAUT_DROITE),
+                new Diagonale(Direction.HAUT_GAUCHE)
                 });
     }
 
