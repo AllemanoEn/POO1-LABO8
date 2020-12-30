@@ -39,7 +39,6 @@ public class Plateau implements ChessController {
         Case caseFrom = plateau[fromX][fromY];
         Case caseTo = plateau[toX][toY];
 
-
         if(echec){
             view.displayMessage("Echec");
         }

@@ -33,6 +33,12 @@ public abstract class Pieces {
         if (getCase() == null){
             return TypeMouvement.INTERDIT;
         }
+
+        //Permet de ne pas pouvoir manger ces propres pièces
+        if(plateau[toX][toY].getPiece() != null && plateau[toX][toY].getPiece().getCouleur() == this.couleur){
+            return TypeMouvement.INTERDIT;
+        }
+
         for (Mouvements m : mouvements){
             if (m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
                 return TypeMouvement.CLASSIC;

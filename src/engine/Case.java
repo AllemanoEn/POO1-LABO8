@@ -36,7 +36,7 @@ public class Case {
         return y;
    }
 
-   Pieces getPiece(){
+   public Pieces getPiece(){
         return piece;
    }
 
