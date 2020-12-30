@@ -13,32 +13,6 @@ public class Vertical extends Mouvements {
     }
 
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
-/*
-        int ecart = 0;
-
-        if(direction == Direction.HAUT){
-            ecart = toY - fromY;
-            if(ecart <= distance && fromX == toX){
-                for (int i = fromY+1; i != toY ;++i){
-                    if(!plateau[fromX][i].isEmpty()){
-                        return false;
-                    }
-                }
-            }
-        } else {
-            ecart = fromY - toY;
-            if(ecart <= distance && fromX == toX){
-                for (int i = fromY-1; i != toY ;--i){
-                    if(!plateau[fromX][i].isEmpty()){
-                        return false;
-                    }
-                }
-            }
-
-        }
-        return true;
-
- */
 
         int ecart;
         int inverseur;

@@ -95,15 +95,16 @@ public class Plateau implements ChessController {
             for(int j = 0; j < dimension; j++){
                 Case caseActuelle = plateau[i][j];
 
-                if (caseActuelle.isEmpty() ||caseActuelle.getPiece().getCouleur() == roi.getCouleur()){
+                if (caseActuelle.isEmpty() || caseActuelle.getPiece().getCouleur() == roi.getCouleur()){
                     continue;
                 }
                 if (caseActuelle.getPiece().mouvementValide(plateau,roi.getX(),roi.getY()) != TypeMouvement.INTERDIT){
                     echec = true;
+                    return echec;
                 }
             }
         }
-
+        echec = false;
         return echec;
     }
 
