@@ -77,6 +77,10 @@ public class Plateau implements ChessController {
         view.putPiece(p.getType(),p.getCouleur(),toX,toY);
 
 
+        if(Echec((p.getCouleur()))){
+            view.displayMessage("Echec");
+        }
+
         ++tour;
 
         return true;
