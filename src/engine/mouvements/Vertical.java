@@ -1,5 +1,6 @@
 package engine.mouvements;
 
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
 
@@ -34,6 +35,10 @@ public class Vertical extends Mouvements {
 
         if (fromX == toX && ecart <= distance && ecart >= 0){
             isOk = true;
+        }
+
+        if(direction == Direction.HAUT && plateau[fromX][fromY].getPiece().getType() == PieceType.PAWN && !plateau[toX][toY].isEmpty()){
+            return false;
         }
 
         if(isOk){
