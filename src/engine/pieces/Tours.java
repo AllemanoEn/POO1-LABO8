@@ -6,6 +6,8 @@ import engine.mouvements.*;
 
 public class Tours extends Pieces {
 
+    boolean firstMove = true;
+
     public Tours(PlayerColor couleur) {
         super(couleur, PieceType.ROOK, 7, new Mouvements[]{
                 new Horizontal(Direction.DROITE),
@@ -17,5 +19,13 @@ public class Tours extends Pieces {
 
     public String toString(){
         return "Tours";
+    }
+
+    public boolean getFirstMove(){
+        return firstMove;
+    }
+
+    public void setFirstMoveFalse(){
+        firstMove = false;
     }
 }

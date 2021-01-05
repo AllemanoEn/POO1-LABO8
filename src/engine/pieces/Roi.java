@@ -2,9 +2,12 @@ package engine.pieces;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Case;
 import engine.mouvements.*;
 
 public class Roi extends Pieces {
+
+    boolean firstMove = true;
 
     public Roi(PlayerColor couleur) {
         super(couleur, PieceType.KING, 1, new Mouvements[]{
@@ -18,10 +21,60 @@ public class Roi extends Pieces {
                 new Diagonale(Direction.BAS_DROITE),
         });
     }
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+
+        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY);
+        if (mouvement == TypeMouvement.INTERDIT && firstMove){
+
+        }
+        return mouvement;
+    }
+
+    boolean roque(Case[][] plateau, Case c, Mouvements mouvements){
+        if (c.isEmpty() || c.getPiece().getType() != PieceType.ROOK){
+            return false;
+        }
+
+        Tours tour = (Tours)c.getPiece();
+
+        if (!tour.firstMove){
+            return false;
+        }
+
+        return mouvements.TrajectoireLibre(plateau,getX(),getY(),c.getX(),c.getY(),8,getCouleur());
+    }
+
+    boolean petitRoque(Case[][] plateau, int toX, int  toY){
+        if (!getFirstMove() || toX !=6 || toY != getY()){
+            return false;
+        }
+        Case tour = plateau[7][getY()];
+        Mouvements droite = new Horizontal(Direction.DROITE);
+
+        return roque(plateau, tour, droite);
+    }
+
+    boolean grandRoque(Case[][] plateau, int toX, int  toY){
+        if (!getFirstMove() || toX !=3 || toY != getY()){
+            return false;
+        }
+        Case tour = plateau[0][getY()];
+        Mouvements gauche = new Horizontal(Direction.GAUCHE);
+
+        return roque(plateau, tour, gauche);
+    }
+
+
 
     public String toString(){
         return "Roi";
     }
+    public boolean getFirstMove(){
+        return firstMove;
+    }
 
+    public void setFirstMoveFalse(){
+        firstMove = false;
+    }
 
 }

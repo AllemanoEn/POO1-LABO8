@@ -3,6 +3,7 @@ package engine;
 
 import chess.ChessController;
 import chess.ChessView;
+import chess.PieceType;
 import chess.PlayerColor;
 import engine.pieces.*;
 
@@ -59,6 +60,10 @@ public class Plateau implements ChessController {
             return false;
         }
 
+        if (test == TypeMouvement.PETIT_ROQUE || test == TypeMouvement.GRAND_ROQUE){
+            return roquer((Roi)p,test, toX,toY);
+        }
+
         caseFrom.removePiece();
         caseTo.addPiece(p);
 
@@ -75,13 +80,78 @@ public class Plateau implements ChessController {
         view.removePiece(fromX,fromY);
         view.putPiece(p.getType(),p.getCouleur(),toX,toY);
 
+        if (p.getType() == PieceType.PAWN){
+            if(((Pions)p).getFirstMove()){
+                ((Pions)p).setFirstMoveFalse();
+            }
+        }
 
         if(Echec((p.getCouleur()))){
             view.displayMessage("Echec");
         }
 
-        ++tour;
+        tour++;
 
+        return true;
+    }
+
+    boolean roquer(Roi roi, TypeMouvement roque, int toX, int toY){
+        Case roiNext;
+        Case roiFrom = plateau[roi.getX()][roi.getY()];
+
+        Case tourFrom;
+        Case tourTo;
+
+
+
+        if (roque == TypeMouvement.PETIT_ROQUE){
+            roiNext = plateau[roi.getX() + 1][roi.getY()];
+            tourFrom = plateau[roi.getX() + 1][roi.getY()];
+            tourTo = plateau[roi.getX() - 1][roi.getY()];
+        }
+        else {
+             roiNext = plateau[roi.getX() - 1][roi.getY()];
+            tourFrom = plateau[roi.getX() - 2][roi.getY()];
+            tourTo = plateau[roi.getX() + 1][roi.getY()];
+        }
+
+        Case roiTo= plateau[toX][toY];
+
+        if (echec){
+            return false;
+        }
+
+        roiFrom.removePiece();
+        roiNext.addPiece(roi);
+        if(Echec(couleurAdversaire((roi.getCouleur())))){
+            roiNext.removePiece();
+            roiFrom.addPiece(roi);
+            return false;
+        }
+
+        roiFrom.removePiece();
+        roiTo.addPiece(roi);
+        if(Echec(couleurAdversaire((roi.getCouleur())))){
+            roiTo.removePiece();
+            roiFrom.addPiece(roi);
+            return false;
+        }
+
+        view.putPiece(roi.getType(),roi.getCouleur(),roiTo.getX(),roiTo.getY());
+        view.removePiece(roiFrom.getX(),roiFrom.getY());
+
+        Pieces tour = tourFrom.getPiece();
+        tourFrom.removePiece();
+        view.removePiece(tourFrom.getX(),tourFrom.getY());
+
+        tourTo.addPiece(tour);
+        view.putPiece(tour.getType(),tour.getCouleur(),tour.getX(),tour.getY());
+
+        if(Echec((roi.getCouleur()))){
+            view.displayMessage("Echec");
+        }
+
+        this.tour++;
         return true;
     }
 

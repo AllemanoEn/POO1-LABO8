@@ -28,5 +28,6 @@ public class Pions extends Pieces {
 
     public void setFirstMoveFalse(){
         firstMove = false;
+        this.distance = 1;
     }
 }

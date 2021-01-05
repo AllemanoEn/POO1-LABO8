@@ -30,6 +30,8 @@ public abstract class Pieces {
     }
 
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+
+
         if (getCase() == null){
             return TypeMouvement.INTERDIT;
         }
