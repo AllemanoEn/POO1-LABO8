@@ -6,7 +6,7 @@ public class Case {
     int x;
     int y;
 
-    Pieces piece;
+    private Pieces piece;
 
     Case(int x, int y){
         this.x = x;
