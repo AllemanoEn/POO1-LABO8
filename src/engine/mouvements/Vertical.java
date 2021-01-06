@@ -14,9 +14,16 @@ import engine.pieces.Pions;
 
 public class Vertical extends Mouvements {
 
+    /**
+     * Constructeur
+     * Crée un mouvement vertical et lui attribu une direction
+     *
+     * @param direction         Direction à attribuer au mouvement
+     * @throws RuntimeException Si la direction est différente de BAS ou HAUT
+     */
     public Vertical(Direction direction){
         if( direction != Direction.BAS && direction != Direction.HAUT){
-            throw new RuntimeException("Pas bien, vertical c'est en BAS et en HAUT");
+            throw new RuntimeException("Les uniques directions vertical c'est en BAS et en HAUT");
         }
         this.direction = direction;
     }
@@ -49,17 +56,9 @@ public class Vertical extends Mouvements {
             return false;
         }
 
-        /*if(direction == Direction.HAUT && plateau[fromX][fromY].getPiece().getType() == PieceType.PAWN && toY-fromY != 0) {
-            Pions p = (Pions) plateau[fromX][fromY].getPiece();
-            if(!p.getFirstMove()){
-                p.setFirstMoveFalse();
-                return false;
-            }
-        }*/
-
         if(isOk){
             for (int i = 1; ecart != i; i++){
-                int ligne;
+                int ligne = 0;
                 if(direction == Direction.HAUT){
                     ligne = fromY + (i * inverseur) ;
                 }

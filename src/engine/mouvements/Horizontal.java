@@ -11,12 +11,20 @@ import engine.Case;
 
 public class Horizontal extends Mouvements{
 
+    /**
+     * Constructeur
+     * Crée un mouvement horizontal et lui attribu une direction
+     *
+     * @param direction         Direction à attribuer au mouvement
+     * @throws RuntimeException Si la direction est différente de GAUCHE ou DROITE
+     */
     public Horizontal(Direction direction){
         if( direction != Direction.GAUCHE && direction != Direction.DROITE){
             throw new RuntimeException("Les uniques directions horizontal sont GAUCHE et DROITE");
         }
         this.direction = direction;
     }
+
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
 
         int ecart;

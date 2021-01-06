@@ -11,6 +11,14 @@ import chess.PlayerColor;
 import engine.Case;
 
 public class Diagonale extends Mouvements {
+
+    /**
+     * Constructeur
+     * Crée un mouvement diagonale et lui attribu une direction
+     *
+     * @param direction         Direction à attribuer au mouvement
+     * @throws RuntimeException Si la direction est différente de BAS_DROITE ou BAS_GAUCHE ou HAUT_DROITE ou HAUT_GAUCHE
+     */
     public Diagonale(Direction direction){
         if( direction != Direction.BAS_DROITE && direction != Direction.BAS_GAUCHE &&
                 direction != Direction.HAUT_DROITE && direction != Direction.HAUT_GAUCHE){
@@ -21,14 +29,12 @@ public class Diagonale extends Mouvements {
 
     public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
 
-
         int ecartX;
         int ecartY;
         int ecart = -1;
         int inverseur;
         int inverseurVertical;
         boolean isOk = false;
-
 
         if(direction == Direction.BAS_GAUCHE || direction == Direction.HAUT_GAUCHE){
             ecartX = fromX - toX;
