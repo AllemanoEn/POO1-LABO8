@@ -55,7 +55,7 @@ public class Plateau implements ChessController {
         }
 
 
-        TypeMouvement mouvementATester = p.mouvementValide(plateau,toX,toY);
+        TypeMouvement mouvementATester = p.mouvementValide(plateau,toX,toY, tour);
         if ( mouvementATester == TypeMouvement.INTERDIT){
             return false;
         }
@@ -84,10 +84,10 @@ public class Plateau implements ChessController {
             if(((Pions)p).getFirstMove()){
                 ((Pions)p).setFirstMoveFalse();
                 if (Math.abs(fromY-toY) > 1){
-                    ((Pions)p).setDernierCoup(TypeMouvement.DOUBLE);
+                    ((Pions)p).setDernierCoup(TypeMouvement.DOUBLE, tour);
                 }
                 else {
-                    ((Pions)p).setDernierCoup(TypeMouvement.CLASSIC);
+                    ((Pions)p).setDernierCoup(TypeMouvement.CLASSIC, tour);
                 }
             }
         }
@@ -236,7 +236,7 @@ public class Plateau implements ChessController {
                 if (caseActuelle.isEmpty() || caseActuelle.getPiece().getCouleur() == roi.getCouleur()){
                     continue;
                 }
-                if (caseActuelle.getPiece().mouvementValide(plateau,roi.getX(),roi.getY()) != TypeMouvement.INTERDIT){
+                if (caseActuelle.getPiece().mouvementValide(plateau,roi.getX(),roi.getY(),tour) != TypeMouvement.INTERDIT){
                     echec = true;
                     return echec;
                 }

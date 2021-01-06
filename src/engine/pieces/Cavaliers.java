@@ -12,7 +12,7 @@ public class Cavaliers extends Pieces {
     }
 
 
-    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour){
 
         int xDeplacement = getX() - toX;
         int yDeplacement = getY() - toY;

@@ -12,33 +12,35 @@ public class Pions extends Pieces {
 
     boolean firstMove = true;
     TypeMouvement dernierCoup;
-   
+    int jouerDernierTour;
 
     public Pions(PlayerColor couleur) {
         super(couleur, PieceType.PAWN, 2, new Mouvements[]{new Vertical(Direction.HAUT),
                 new Diagonale(Direction.HAUT_DROITE),
                 new Diagonale(Direction.HAUT_GAUCHE)
                 });
+
+        jouerDernierTour = 0;
     }
 
     public String toString(){
         return "Pions";
     }
 
-    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
-        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY);
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour){
+        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY, tour);
 
         if (peutEtrePromu(toY) && mouvement != TypeMouvement.INTERDIT){
             mouvement = TypeMouvement.PROMOTION;
         }
 
         if (mouvement == TypeMouvement.INTERDIT){
-            mouvement = enPassant(plateau, toX, toY);
+            mouvement = enPassant(plateau, toX, toY, tour);
         }
         return mouvement;
     }
 
-    private TypeMouvement enPassant(Case[][] plateau, int toX, int toY){
+    private TypeMouvement enPassant(Case[][] plateau, int toX, int toY, int tour){
 
         if(!plateau[toX][toY].isEmpty()){
             return TypeMouvement.INTERDIT;
@@ -54,7 +56,7 @@ public class Pions extends Pieces {
 
 
         Pions pions = (Pions)plateau[toX][getY()].getPiece();
-        if (pions.dernierCoup != TypeMouvement.DOUBLE){
+        if (pions.dernierCoup != TypeMouvement.DOUBLE || pions.getJouerDernierTour() != tour - 1 ){
             return TypeMouvement.INTERDIT;
         }
 
@@ -74,11 +76,15 @@ public class Pions extends Pieces {
     public void setFirstMoveFalse(){
         firstMove = false;
         distance = 1;
-
     }
 
-    public void setDernierCoup(TypeMouvement dernierCoup){
+    public void setDernierCoup(TypeMouvement dernierCoup, int tour){
         this.dernierCoup = dernierCoup;
+        jouerDernierTour = tour;
+    }
+
+    int getJouerDernierTour(){
+        return jouerDernierTour;
     }
 
 }
