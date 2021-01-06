@@ -83,6 +83,12 @@ public class Plateau implements ChessController {
         if (p.getType() == PieceType.PAWN){
             if(((Pions)p).getFirstMove()){
                 ((Pions)p).setFirstMoveFalse();
+                if (Math.abs(fromY-toY) > 1){
+                    ((Pions)p).setDernierCoup(TypeMouvement.DOUBLE);
+                }
+                else {
+                    ((Pions)p).setDernierCoup(TypeMouvement.CLASSIC);
+                }
             }
         }
 
@@ -99,7 +105,11 @@ public class Plateau implements ChessController {
         }
 
         if (mouvementATester == TypeMouvement.PROMOTION){
-            Promouvoir(p);
+            promouvoir(p);
+        }
+
+        if (mouvementATester == TypeMouvement.EN_PASSANT){
+            enPassant(fromX, fromY, toX);
         }
 
         if(Echec((p.getCouleur()))){
@@ -111,7 +121,24 @@ public class Plateau implements ChessController {
         return true;
     }
 
-    private void Promouvoir(Pieces p) {
+    private void enPassant (int fromX, int fromY, int toX) {
+        int xDestination;
+
+
+        if (fromX - toX > 0){
+            xDestination = toX - 1;
+        }
+        else {
+            xDestination = toX + 1;
+        }
+        plateau[xDestination][fromY].removePiece();
+        view.removePiece(xDestination,fromY);
+
+    }
+
+
+
+    private void promouvoir(Pieces p) {
 
         Pieces dame = new Dame(p.getCouleur());
         Pieces cavalier = new Cavaliers(p.getCouleur());

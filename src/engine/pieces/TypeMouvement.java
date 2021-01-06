@@ -5,5 +5,7 @@ public enum TypeMouvement {
     INTERDIT,
     GRAND_ROQUE,
     PETIT_ROQUE,
-    PROMOTION
+    PROMOTION,
+    DOUBLE,
+    EN_PASSANT
 }
