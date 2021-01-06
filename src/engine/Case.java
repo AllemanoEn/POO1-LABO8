@@ -14,36 +14,73 @@ public class Case {
 
     private Pieces piece;
 
+    /**
+     * Constructeur
+     * Attribue une coordonnée x y à un case
+     *
+     * @param x position x
+     * @param y position y
+     */
     Case(int x, int y){
         this.x = x;
         this.y = y;
     }
 
-   public boolean isEmpty(){
+    /**
+     * Détermine si une case est vide
+     *
+     * @return vrai si vide faux sinon
+     */
+    public boolean isEmpty(){
         return piece == null;
-   }
+    }
 
-   void addPiece(Pieces p){
+    /**
+     * Ajoute une pièce sur la case courante
+     * Si une pièce se trouve préalablement sur la case, cette pièce est retirée via la méthode removePiece()
+     *
+     * @param p pièce à ajouter
+     */
+    void addPiece(Pieces p){
         if (piece != null){
             removePiece();
         }
         piece = p;
         piece.setCase(this);
-   }
-   void removePiece(){
+    }
+
+    /**
+     * Retire la pièce qui se trouve sur la case courante
+     */
+    void removePiece(){
         piece.setCase(null);
         piece = null;
-   }
+    }
 
-   public int getX(){
+    /**
+     * Permet de récupérer la position x de la case courante
+     *
+     * @return l'attribut x
+     */
+    public int getX(){
         return x;
-   }
-   public int getY(){
+    }
+
+    /**
+     * Permet de récupérer la position y de la case courante
+     *
+     * @return l'attribut y
+     */
+    public int getY(){
         return y;
-   }
+    }
 
-   public Pieces getPiece(){
+    /**
+     * Permet de récupérer la pièce qui se trouve sur la case courante
+     *
+     * @return la pièce
+     */
+    public Pieces getPiece(){
         return piece;
-   }
-
+    }
 }
