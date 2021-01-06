@@ -103,16 +103,11 @@ public class Plateau implements ChessController {
         Case tourTo;
 
 
-
         if (roque == TypeMouvement.PETIT_ROQUE){
             roiNext = plateau[roi.getX() + 1][roi.getY()];
-            tourFrom = plateau[roi.getX() + 1][roi.getY()];
-            tourTo = plateau[roi.getX() - 1][roi.getY()];
         }
         else {
-             roiNext = plateau[roi.getX() - 1][roi.getY()];
-            tourFrom = plateau[roi.getX() - 2][roi.getY()];
-            tourTo = plateau[roi.getX() + 1][roi.getY()];
+            roiNext = plateau[roi.getX() - 1][roi.getY()];
         }
 
         Case roiTo= plateau[toX][toY];
@@ -129,7 +124,7 @@ public class Plateau implements ChessController {
             return false;
         }
 
-        roiFrom.removePiece();
+        roiNext.removePiece();
         roiTo.addPiece(roi);
         if(Echec(couleurAdversaire((roi.getCouleur())))){
             roiTo.removePiece();
@@ -139,6 +134,15 @@ public class Plateau implements ChessController {
 
         view.putPiece(roi.getType(),roi.getCouleur(),roiTo.getX(),roiTo.getY());
         view.removePiece(roiFrom.getX(),roiFrom.getY());
+
+        if (roque == TypeMouvement.PETIT_ROQUE){
+            tourFrom = plateau[roi.getX() + 1][roi.getY()];
+            tourTo = plateau[roi.getX() - 1][roi.getY()];
+        }
+        else {
+            tourFrom = plateau[roi.getX() - 2][roi.getY()];
+            tourTo = plateau[roi.getX() + 1][roi.getY()];
+        }
 
         Pieces tour = tourFrom.getPiece();
         tourFrom.removePiece();

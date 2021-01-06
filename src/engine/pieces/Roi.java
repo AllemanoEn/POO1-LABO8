@@ -51,7 +51,7 @@ public class Roi extends Pieces {
     }
 
     boolean petitRoque(Case[][] plateau, int toX, int  toY){
-        if (!getFirstMove() || toX !=6 || toY != getY()){
+        if (!getFirstMove() || (toX !=6 || toY != getY())){
             return false;
         }
         Case tour = plateau[7][getY()];
@@ -61,7 +61,7 @@ public class Roi extends Pieces {
     }
 
     boolean grandRoque(Case[][] plateau, int toX, int  toY){
-        if (!getFirstMove() || toX !=3 || toY != getY()){
+        if (!getFirstMove() || (toX !=3 || toY != getY())){
             return false;
         }
         Case tour = plateau[0][getY()];
