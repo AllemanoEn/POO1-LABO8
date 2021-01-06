@@ -11,7 +11,7 @@ public class Cavaliers extends Pieces {
         super(couleur, PieceType.KNIGHT, 3, new Mouvements[0]);
     }
 
-/*
+
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
 
         int xDeplacement = getX() - toX;
@@ -19,16 +19,16 @@ public class Cavaliers extends Pieces {
 
         Case to = plateau[toX][toY];
 
-        if ((Math.abs(xDeplacement) == 2 && Math.abs(yDeplacement) == 1) ||
-                (Math.abs(xDeplacement) == 1 && Math.abs(yDeplacement) == 2) &&
-                to.isEmpty() || to.getPiece().getCouleur() != getCouleur()){
+        if ((Math.abs(xDeplacement) == 2 && Math.abs(yDeplacement) == 1 ||
+                Math.abs(xDeplacement) == 1 && Math.abs(yDeplacement) == 2) &&
+                (to.isEmpty() || to.getPiece().getCouleur() != getCouleur())){
             return TypeMouvement.CLASSIC;
         }
 
         return TypeMouvement.INTERDIT;
     }
 
-*/
+
 
     public String toString(){
         return "Cavaliers";

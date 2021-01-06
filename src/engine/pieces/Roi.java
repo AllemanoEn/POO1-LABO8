@@ -21,22 +21,21 @@ public class Roi extends Pieces {
                 new Diagonale(Direction.BAS_DROITE),
         });
     }
-/*
-    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY) {
 
         TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY);
 
-        if (mouvement == TypeMouvement.INTERDIT && firstMove){
-            if(petitRoque(plateau, toX, toY)){
+        if (mouvement == TypeMouvement.INTERDIT && firstMove) {
+            if (petitRoque(plateau, toX, toY)) {
                 mouvement = TypeMouvement.PETIT_ROQUE;
-            }
-            else if(grandRoque(plateau, toX, toY)){
+            } else if (grandRoque(plateau, toX, toY)) {
                 mouvement = TypeMouvement.GRAND_ROQUE;
             }
         }
         return mouvement;
     }
-*/
+
     boolean roque(Case[][] plateau, Case c, Mouvements mouvements){
         if (c.isEmpty() || c.getPiece().getType() != PieceType.ROOK){
             return false;
