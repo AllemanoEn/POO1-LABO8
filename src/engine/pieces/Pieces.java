@@ -64,7 +64,7 @@ public abstract class Pieces implements ChessView.UserChoice {
         }
 
         for (Mouvements m : mouvements){
-            if (m.TrajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
+            if (m.trajectoireLibre(plateau,getX(),getY(),toX,toY,getDistance(),getCouleur())){
                 return TypeMouvement.CLASSIC;
             }
         }

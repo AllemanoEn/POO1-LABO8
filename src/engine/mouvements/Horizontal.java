@@ -25,7 +25,7 @@ public class Horizontal extends Mouvements{
         this.direction = direction;
     }
 
-    public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
+    public boolean trajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
 
         int ecart;
         boolean isOk = false;

@@ -75,7 +75,7 @@ public class Roi extends Pieces {
             return false;
         }
 
-        return mouvements.TrajectoireLibre(plateau,getX(),getY(),c.getX(),c.getY(),8,getCouleur());
+        return mouvements.trajectoireLibre(plateau,getX(),getY(),c.getX(),c.getY(),8,getCouleur());
     }
 
     /**
