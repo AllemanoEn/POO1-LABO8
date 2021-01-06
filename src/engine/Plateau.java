@@ -115,10 +115,10 @@ public class Plateau implements ChessController {
 
         Pieces dame = new Dame(p.getCouleur());
         Pieces cavalier = new Cavaliers(p.getCouleur());
-        //Pieces tour = new Tours(p.getCouleur());
-        //Pieces fou = new Fous(p.getCouleur());
+        Pieces tour = new Tours(p.getCouleur());
+        Pieces fou = new Fous(p.getCouleur());
 
-        Pieces pieceSelectionee = view.askUser("Promotion", "Choisir une pièce pour la promotion");
+        Pieces pieceSelectionee = view.askUser("Promotion", "Choisir une pièce pour la promotion",dame,cavalier,tour,fou);
         plateau[p.getX()][p.getY()].removePiece();
         plateau[p.getX()][p.getY()].addPiece(pieceSelectionee);
         view.removePiece(p.getX(), p.getY());

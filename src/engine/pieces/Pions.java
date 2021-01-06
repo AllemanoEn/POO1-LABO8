@@ -45,4 +45,5 @@ public class Pions extends Pieces {
     private boolean peutEtrePromu (int y){
         return y == 0 || y == 7;
     }
+
 }

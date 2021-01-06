@@ -1,11 +1,12 @@
 package engine.pieces;
 
+import chess.ChessView;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
 import engine.mouvements.Mouvements;
 
-public abstract class Pieces {
+public abstract class Pieces implements ChessView.UserChoice {
 
     PlayerColor couleur;
     PieceType type;
@@ -76,4 +77,9 @@ public abstract class Pieces {
     public void setCase(Case c){
         this.c = c;
     }
+
+    public String textValue(){
+        return toString();
+    }
+
 }
