@@ -55,13 +55,13 @@ public class Plateau implements ChessController {
         }
 
 
-        TypeMouvement test = p.mouvementValide(plateau,toX,toY);
-        if ( test == TypeMouvement.INTERDIT){
+        TypeMouvement mouvementATester = p.mouvementValide(plateau,toX,toY);
+        if ( mouvementATester == TypeMouvement.INTERDIT){
             return false;
         }
 
-        if (test == TypeMouvement.PETIT_ROQUE || test == TypeMouvement.GRAND_ROQUE){
-            return roquer((Roi)p,test, toX,toY);
+        if (mouvementATester == TypeMouvement.PETIT_ROQUE || mouvementATester == TypeMouvement.GRAND_ROQUE){
+            return roquer((Roi)p,mouvementATester, toX,toY);
         }
 
         caseFrom.removePiece();
@@ -86,6 +86,10 @@ public class Plateau implements ChessController {
             }
         }
 
+        if (mouvementATester == TypeMouvement.PROMOTION){
+            Promouvoir(p);
+        }
+
         if(Echec((p.getCouleur()))){
             view.displayMessage("Echec");
         }
@@ -93,6 +97,20 @@ public class Plateau implements ChessController {
         tour++;
 
         return true;
+    }
+
+    private void Promouvoir(Pieces p) {
+
+        Pieces dame = new Dame(p.getCouleur());
+        Pieces cavalier = new Cavaliers(p.getCouleur());
+        //Pieces tour = new Tours(p.getCouleur());
+        //Pieces fou = new Fous(p.getCouleur());
+
+        Pieces pieceSelectionee = view.askUser("Promotion", "Choisir une pièce pour la promotion");
+        plateau[p.getY()][p.getX()].removePiece();
+        plateau[p.getY()][p.getX()].addPiece(pieceSelectionee);
+        view.removePiece(p.getX(), p.getY());
+        view.putPiece(pieceSelectionee.getType(), pieceSelectionee.getCouleur(), pieceSelectionee.getX(), pieceSelectionee.getY());
     }
 
     boolean roquer(Roi roi, TypeMouvement roque, int toX, int toY){

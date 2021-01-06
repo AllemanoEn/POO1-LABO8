@@ -2,6 +2,7 @@ package engine.pieces;
 
 import chess.PieceType;
 import chess.PlayerColor;
+import engine.Case;
 import engine.mouvements.Diagonale;
 import engine.mouvements.Direction;
 import engine.mouvements.Mouvements;
@@ -22,6 +23,16 @@ public class Pions extends Pieces {
         return "Pions";
     }
 
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY){
+        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY);
+
+        if (peutEtrePromu(toY) && mouvement != TypeMouvement.INTERDIT){
+            mouvement = TypeMouvement.PROMOTION;
+        }
+
+        return mouvement;
+    }
+
     public boolean getFirstMove(){
         return firstMove;
     }
@@ -29,5 +40,9 @@ public class Pions extends Pieces {
     public void setFirstMoveFalse(){
         firstMove = false;
         this.distance = 1;
+    }
+
+    private boolean peutEtrePromu (int y){
+        return y == 0 || y == 7;
     }
 }
