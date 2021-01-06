@@ -109,7 +109,7 @@ public class Plateau implements ChessController {
         }
 
         if (mouvementATester == TypeMouvement.EN_PASSANT){
-            enPassant(fromX, fromY, toX);
+            enPassant(fromX,fromY ,toX);
         }
 
         if(Echec((p.getCouleur()))){
@@ -121,18 +121,11 @@ public class Plateau implements ChessController {
         return true;
     }
 
-    private void enPassant (int fromX, int fromY, int toX) {
-        int xDestination;
+    private void enPassant (int fromX,int fromY,int toX) {
 
 
-        if (fromX - toX > 0){
-            xDestination = toX - 1;
-        }
-        else {
-            xDestination = toX + 1;
-        }
-        plateau[xDestination][fromY].removePiece();
-        view.removePiece(xDestination,fromY);
+        plateau[toX][fromY].removePiece();
+        view.removePiece(toX,fromY);
 
     }
 
