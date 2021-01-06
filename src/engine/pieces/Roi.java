@@ -22,9 +22,9 @@ public class Roi extends Pieces {
         });
     }
 
-    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY) {
+    public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour) {
 
-        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY);
+        TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY, tour);
 
         if (mouvement == TypeMouvement.INTERDIT && firstMove) {
             if (petitRoque(plateau, toX, toY)) {
