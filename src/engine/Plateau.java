@@ -18,13 +18,13 @@ import java.util.Arrays;
 
 public class Plateau implements ChessController {
 
-    static final int dimension = 8;
+    private static final int dimension = 8;
     private ChessView view;
-    Case[][] plateau;
-    int tour;
-    boolean echec;
-    Pieces roiBlanc;
-    Pieces roiNoir;
+    private Case[][] plateau;
+    private int tour;
+    private  boolean echec;
+    private Pieces roiBlanc;
+    private Pieces roiNoir;
 
     /**
      * Constructeur, crée le plateau de jeu
@@ -82,7 +82,7 @@ public class Plateau implements ChessController {
         caseTo.addPiece(p);
 
         // Se le coup met le roi en echec, on annule
-        if(Echec(couleurAdversaire((p.getCouleur())))){
+        if(echec(couleurAdversaire((p.getCouleur())))){
             caseTo.removePiece();
             caseFrom.addPiece(p);
             return false;
@@ -131,7 +131,7 @@ public class Plateau implements ChessController {
         }
 
         // Si notre coup met le roi adverse en echec, on affiche le message
-        if(Echec((p.getCouleur()))){
+        if(echec((p.getCouleur()))){
             view.displayMessage("Echec");
         }
 
@@ -187,7 +187,7 @@ public class Plateau implements ChessController {
      * @param toY       Destination Y
      * @return Vrai si le roque c'est effectué correctement, sinon faux
      */
-    boolean roquer(Roi roi, TypeMouvement roque, int toX, int toY){
+    private boolean roquer(Roi roi, TypeMouvement roque, int toX, int toY){
 
         Case roiNext;
         Case roiFrom = plateau[roi.getX()][roi.getY()];
@@ -213,7 +213,7 @@ public class Plateau implements ChessController {
         // On déplace le roi d'une case et contrôle si il est en echec
         roiFrom.removePiece();
         roiNext.addPiece(roi);
-        if(Echec(couleurAdversaire((roi.getCouleur())))){
+        if(echec(couleurAdversaire((roi.getCouleur())))){
             roiNext.removePiece();
             roiFrom.addPiece(roi);
             return false;
@@ -222,7 +222,7 @@ public class Plateau implements ChessController {
         // On déplace finalement le roi à la case de destination et on controle si il est en echec
         roiNext.removePiece();
         roiTo.addPiece(roi);
-        if(Echec(couleurAdversaire((roi.getCouleur())))){
+        if(echec(couleurAdversaire((roi.getCouleur())))){
             roiTo.removePiece();
             roiFrom.addPiece(roi);
             return false;
@@ -250,7 +250,7 @@ public class Plateau implements ChessController {
         view.putPiece(tour.getType(),tour.getCouleur(),tour.getX(),tour.getY());
 
         // Si notre roque met le roi adverse en echec, on affiche le message
-        if(Echec((roi.getCouleur()))){
+        if(echec((roi.getCouleur()))){
             view.displayMessage("Echec");
         }
 
@@ -268,7 +268,7 @@ public class Plateau implements ChessController {
      * @param couleurAdversaire     La couleur de notre adversaire
      * @return Vrai si le roi est en echec, sinon faux
      */
-    boolean Echec(PlayerColor couleurAdversaire){
+    private boolean echec(PlayerColor couleurAdversaire){
         Pieces roi;
         if (couleurAdversaire == PlayerColor.WHITE){
             roi = roiNoir;
@@ -300,7 +300,7 @@ public class Plateau implements ChessController {
      * @param couleur       Notre couleur
      * @return La couleur de notre adversaire
      */
-    PlayerColor couleurAdversaire(PlayerColor couleur){
+    private PlayerColor couleurAdversaire(PlayerColor couleur){
         if (couleur == PlayerColor.WHITE){
             return PlayerColor.BLACK;
         }

@@ -9,9 +9,9 @@ import engine.pieces.Pieces;
 
 
 public class Case {
-    int x;
-    int y;
 
+    private final int x;
+    private final int y;
     private Pieces piece;
 
     /**
@@ -41,7 +41,7 @@ public class Case {
      *
      * @param p pièce à ajouter
      */
-    void addPiece(Pieces p){
+    public void addPiece(Pieces p){
         if (piece != null){
             removePiece();
         }
@@ -52,34 +52,20 @@ public class Case {
     /**
      * Retire la pièce qui se trouve sur la case courante
      */
-    void removePiece(){
+    public void removePiece(){
         piece.setCase(null);
         piece = null;
     }
 
-    /**
-     * Permet de récupérer la position x de la case courante
-     *
-     * @return l'attribut x
-     */
+   // Fonction get
     public int getX(){
         return x;
     }
 
-    /**
-     * Permet de récupérer la position y de la case courante
-     *
-     * @return l'attribut y
-     */
     public int getY(){
         return y;
     }
 
-    /**
-     * Permet de récupérer la pièce qui se trouve sur la case courante
-     *
-     * @return la pièce
-     */
     public Pieces getPiece(){
         return piece;
     }

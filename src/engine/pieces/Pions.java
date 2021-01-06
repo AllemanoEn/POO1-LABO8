@@ -16,9 +16,9 @@ import engine.mouvements.Vertical;
 
 public class Pions extends Pieces {
 
-    boolean premierCoup = true;
-    TypeMouvement dernierCoup;
-    int jouerDernierTour;
+    private boolean premierCoup = true;
+    private TypeMouvement dernierCoup;
+    private int jouerDernierTour;
 
     /**
      * Constructeur

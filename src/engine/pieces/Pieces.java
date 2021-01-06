@@ -14,12 +14,12 @@ import engine.mouvements.Mouvements;
 
 public abstract class Pieces implements ChessView.UserChoice {
 
-    PlayerColor couleur;
-    PieceType type;
+    private final PlayerColor couleur;
+    private final PieceType type;
     int distance;
-    Case c;
-    Mouvements[] mouvements;
-    int dernierTourDeplace;
+    private Case c;
+    private final Mouvements[] mouvements;
+    private int dernierTourDeplace;
 
     /**
      * Constructeur

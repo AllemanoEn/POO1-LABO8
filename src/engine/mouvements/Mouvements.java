@@ -10,7 +10,7 @@ import chess.PlayerColor;
 import engine.Case;
 
 public abstract class Mouvements {
-    Direction direction;
+    public Direction direction;
 
     /**
      *Prototype de la fonction TrajectoireLibre.

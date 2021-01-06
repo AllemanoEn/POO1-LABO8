@@ -13,7 +13,7 @@ import engine.mouvements.*;
 
 public class Roi extends Pieces {
 
-    boolean firstMove = true;
+    private boolean firstMove = true;
 
     /**
      * Constructeur
@@ -64,7 +64,7 @@ public class Roi extends Pieces {
      * @param mouvements    déplacement a effectuer
      * @return Vrai si le roque est possible, sinon faux
      */
-    boolean roque(Case[][] plateau, Case c, Mouvements mouvements){
+    private boolean roque(Case[][] plateau, Case c, Mouvements mouvements){
         if (c.isEmpty() || c.getPiece().getType() != PieceType.ROOK){
             return false;
         }
@@ -86,7 +86,7 @@ public class Roi extends Pieces {
      * @param toY       Destination Y
      * @return Vrai si il est possible de faire le petit roque, sinon faux
      */
-    boolean petitRoque(Case[][] plateau, int toX, int  toY){
+    private boolean petitRoque(Case[][] plateau, int toX, int  toY){
         if (!getFirstMove() || (toX !=6 || toY != getY())){
             return false;
         }
@@ -104,7 +104,7 @@ public class Roi extends Pieces {
      * @param toY       Destination Y
      * @return Vrai si il est possible de faire le grand roque, sinon faux
      */
-    boolean grandRoque(Case[][] plateau, int toX, int  toY){
+    private boolean grandRoque(Case[][] plateau, int toX, int  toY){
         if (!getFirstMove() || (toX !=3 && toY != getY())){
             return false;
         }

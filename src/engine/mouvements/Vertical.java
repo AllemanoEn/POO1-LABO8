@@ -9,8 +9,7 @@ package engine.mouvements;
 import chess.PieceType;
 import chess.PlayerColor;
 import engine.Case;
-import engine.pieces.Pieces;
-import engine.pieces.Pions;
+
 
 public class Vertical extends Mouvements {
 
