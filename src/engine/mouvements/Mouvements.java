@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Mouvements.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Déclare la classe abstraite Mouvements
+ * Date     : 06.01.2021
+ */
 package engine.mouvements;
 
 import chess.PlayerColor;

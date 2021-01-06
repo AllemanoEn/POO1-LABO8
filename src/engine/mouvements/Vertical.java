@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Vertical.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Déclare le mouvement Vertical
+ * Date     : 06.01.2021
+ */
 package engine.mouvements;
 
 import chess.PieceType;

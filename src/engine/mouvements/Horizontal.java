@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Horizontal.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Déclare le mouvement Horizontal
+ * Date     : 06.01.2021
+ */
 package engine.mouvements;
 
 import chess.PlayerColor;
@@ -7,7 +13,7 @@ public class Horizontal extends Mouvements{
 
     public Horizontal(Direction direction){
         if( direction != Direction.GAUCHE && direction != Direction.DROITE){
-            throw new RuntimeException("Pas bien, horizontal c'est GAUCHE et DROITE");
+            throw new RuntimeException("Les uniques directions horizontal sont GAUCHE et DROITE");
         }
         this.direction = direction;
     }
