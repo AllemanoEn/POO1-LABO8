@@ -86,6 +86,18 @@ public class Plateau implements ChessController {
             }
         }
 
+        if (p.getType() == PieceType.ROOK){
+            if(((Tours)p).getFirstMove()){
+                ((Tours)p).setFirstMoveFalse();
+            }
+        }
+
+        if (p.getType() == PieceType.KING){
+            if(((Roi)p).getFirstMove()){
+                ((Roi)p).setFirstMoveFalse();
+            }
+        }
+
         if (mouvementATester == TypeMouvement.PROMOTION){
             Promouvoir(p);
         }
@@ -172,6 +184,11 @@ public class Plateau implements ChessController {
         if(Echec((roi.getCouleur()))){
             view.displayMessage("Echec");
         }
+
+
+        roi.setFirstMoveFalse();
+        ((Tours)tour).setFirstMoveFalse();
+
 
         this.tour++;
         return true;
