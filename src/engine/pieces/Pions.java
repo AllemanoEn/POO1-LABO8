@@ -12,6 +12,7 @@ public class Pions extends Pieces {
 
     boolean firstMove = true;
     TypeMouvement dernierCoup;
+   
 
     public Pions(PlayerColor couleur) {
         super(couleur, PieceType.PAWN, 2, new Mouvements[]{new Vertical(Direction.HAUT),
@@ -39,26 +40,20 @@ public class Pions extends Pieces {
 
     private TypeMouvement enPassant(Case[][] plateau, int toX, int toY){
 
-        int xDestination;
-
-        if (getX() - toX > 0){
-            xDestination = toX - 1;
-        }
-        else {
-            xDestination = toX + 1;
+        if(!plateau[toX][toY].isEmpty()){
+            return TypeMouvement.INTERDIT;
         }
 
-        if(!plateau[xDestination][toY].isEmpty()){
+        if(plateau[toX][getY()].getPiece() == null){
+            return TypeMouvement.INTERDIT;
+        }
+        if(plateau[toX][getY()].getPiece().getType() != PieceType.PAWN ||
+                plateau[toX][getY()].getPiece().getCouleur() == getCouleur()){
             return TypeMouvement.INTERDIT;
         }
 
 
-        if(plateau[xDestination][toY].getPiece().getType() != PieceType.PAWN ||
-                plateau[xDestination][toY].getPiece().getCouleur() == getCouleur()){
-            return TypeMouvement.INTERDIT;
-        }
-
-        Pions pions = (Pions)plateau[xDestination][toY].getPiece();
+        Pions pions = (Pions)plateau[toX][getY()].getPiece();
         if (pions.dernierCoup != TypeMouvement.DOUBLE){
             return TypeMouvement.INTERDIT;
         }
