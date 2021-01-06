@@ -26,7 +26,7 @@ public abstract class Mouvements {
      * @param playerColor   Couleur du joueur courant
      * @return              Vrai si la trajectoire est livre et faux si elle ne l'est pas
      */
-    public boolean TrajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
+    public boolean trajectoireLibre(Case[][] plateau, int fromX, int fromY, int toX, int toY, int distance, PlayerColor playerColor) {
         return false;
     }
 
