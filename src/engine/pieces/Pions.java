@@ -16,7 +16,7 @@ import engine.mouvements.Vertical;
 
 public class Pions extends Pieces {
 
-    boolean firstMove = true;
+    boolean premierCoup = true;
     TypeMouvement dernierCoup;
     int jouerDernierTour;
 
@@ -102,8 +102,8 @@ public class Pions extends Pieces {
     }
 
     // Fonction get
-    public boolean getFirstMove(){
-        return firstMove;
+    public boolean getPremierCoup(){
+        return premierCoup;
     }
 
     int getJouerDernierTour(){
@@ -111,8 +111,8 @@ public class Pions extends Pieces {
     }
 
     // Fonction set
-    public void setFirstMoveFalse(){
-        firstMove = false;
+    public void setPremierCoupFalse(){
+        premierCoup = false;
         distance = 1;
     }
 

@@ -96,8 +96,8 @@ public class Plateau implements ChessController {
         // Si on a déplacé un pion, on lui retire son droit de se déplacer de 2 cases
         // On enregistre les caractéristiques de son déplacement (Type et numéro du tour)
         if (p.getType() == PieceType.PAWN){
-            if(((Pions)p).getFirstMove()){
-                ((Pions)p).setFirstMoveFalse();
+            if(((Pions)p).getPremierCoup()){
+                ((Pions)p).setPremierCoupFalse();
                 if (Math.abs(fromY-toY) > 1){
                     ((Pions)p).setDernierCoup(TypeMouvement.DOUBLE, tour);
                 }
