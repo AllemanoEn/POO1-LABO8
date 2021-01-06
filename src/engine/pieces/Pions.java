@@ -20,6 +20,11 @@ public class Pions extends Pieces {
     TypeMouvement dernierCoup;
     int jouerDernierTour;
 
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Pions(PlayerColor couleur) {
         super(couleur, PieceType.PAWN, 2, new Mouvements[]{new Vertical(Direction.HAUT),
                 new Diagonale(Direction.HAUT_DROITE),
@@ -29,10 +34,17 @@ public class Pions extends Pieces {
         jouerDernierTour = 0;
     }
 
-    public String toString(){
-        return "Pions";
-    }
 
+
+    /**
+     * Controle si un mouvement est valide
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @param tour      Numéro du tour
+     * @return Un TypeMouvement catégorisant le mouvement tester
+     */
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour){
         TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY, tour);
 
@@ -46,6 +58,16 @@ public class Pions extends Pieces {
         return mouvement;
     }
 
+
+    /**
+     * Controle si la prise en passant est possible
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @param tour      Numéro du tour
+     * @return Un TypeMouvement définissant si la prise en passant peut etre faite ou non
+     */
     private TypeMouvement enPassant(Case[][] plateau, int toX, int toY, int tour){
 
         if(!plateau[toX][toY].isEmpty()){
@@ -69,16 +91,26 @@ public class Pions extends Pieces {
         return TypeMouvement.EN_PASSANT;
     }
 
-
+    /**
+     * Controle si un pion peut etre promu
+     *
+     * @param y     la valeur y
+     * @return Vrai si il peut etre promu, sinon faux
+     */
     private boolean peutEtrePromu (int y){
         return y == 0 || y == 7;
     }
 
-
+    // Fonction get
     public boolean getFirstMove(){
         return firstMove;
     }
 
+    int getJouerDernierTour(){
+        return jouerDernierTour;
+    }
+
+    // Fonction set
     public void setFirstMoveFalse(){
         firstMove = false;
         distance = 1;
@@ -89,8 +121,8 @@ public class Pions extends Pieces {
         jouerDernierTour = tour;
     }
 
-    int getJouerDernierTour(){
-        return jouerDernierTour;
-    }
 
+    public String toString(){
+        return "Pions";
+    }
 }

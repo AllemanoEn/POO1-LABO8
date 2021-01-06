@@ -26,6 +26,9 @@ public class Plateau implements ChessController {
     Pieces roiBlanc;
     Pieces roiNoir;
 
+    /**
+     * Constructeur, crée le plateau de jeu
+     */
     public Plateau(){
         plateau = new Case[dimension][dimension];
         for(int colonne = 0; colonne < dimension; colonne ++){
@@ -46,6 +49,7 @@ public class Plateau implements ChessController {
         Case caseFrom = plateau[fromX][fromY];
         Case caseTo = plateau[toX][toY];
 
+        // En cas d'échec on affiche le message
         if(echec){
             view.displayMessage("Echec");
         }
@@ -54,8 +58,10 @@ public class Plateau implements ChessController {
             return false;
         }
 
+        // Piece deplacee
         Pieces p = caseFrom.getPiece();
 
+        // Permet de savoir quel couleur doit jouer
         if (tour % 2 == 1 && p.getCouleur() != PlayerColor.WHITE || tour % 2 == 0 && p.getCouleur() != PlayerColor.BLACK){
             return false;
         }
@@ -66,26 +72,29 @@ public class Plateau implements ChessController {
             return false;
         }
 
+        // On test si le roque est à effectuer, si oui on le fait
         if (mouvementATester == TypeMouvement.PETIT_ROQUE || mouvementATester == TypeMouvement.GRAND_ROQUE){
             return roquer((Roi)p,mouvementATester, toX,toY);
         }
 
+        // Effectue le déplacement des pieces
         caseFrom.removePiece();
         caseTo.addPiece(p);
 
-        //ça fait des choses bizzares mais c'est normal je crois
-
+        // Se le coup met le roi en echec, on annule
         if(Echec(couleurAdversaire((p.getCouleur())))){
             caseTo.removePiece();
             caseFrom.addPiece(p);
             return false;
         }
 
-
+        // On applique les modifications sur l'interface graphique
         view.displayMessage("");
         view.removePiece(fromX,fromY);
         view.putPiece(p.getType(),p.getCouleur(),toX,toY);
 
+        // Si on a déplacé un pion, on lui retire son droit de se déplacer de 2 cases
+        // On enregistre les caractéristiques de son déplacement (Type et numéro du tour)
         if (p.getType() == PieceType.PAWN){
             if(((Pions)p).getFirstMove()){
                 ((Pions)p).setFirstMoveFalse();
@@ -98,26 +107,30 @@ public class Plateau implements ChessController {
             }
         }
 
+        // Si on déplace une tour, elle ne peut plus roquer
         if (p.getType() == PieceType.ROOK){
             if(((Tours)p).getFirstMove()){
                 ((Tours)p).setFirstMoveFalse();
             }
         }
-
+        // Si on déplace le roi, il ne peut plus roquer
         if (p.getType() == PieceType.KING){
             if(((Roi)p).getFirstMove()){
                 ((Roi)p).setFirstMoveFalse();
             }
         }
 
+        // Si il y a une promotion a faire, on l'effectue
         if (mouvementATester == TypeMouvement.PROMOTION){
             promouvoir(p);
         }
 
+        // Si il y a une prise en passant a faire, on l'effectue
         if (mouvementATester == TypeMouvement.EN_PASSANT){
-            enPassant(fromX,fromY ,toX);
+            enPassant(fromY ,toX);
         }
 
+        // Si notre coup met le roi adverse en echec, on affiche le message
         if(Echec((p.getCouleur()))){
             view.displayMessage("Echec");
         }
@@ -127,44 +140,62 @@ public class Plateau implements ChessController {
         return true;
     }
 
-    private void enPassant (int fromX,int fromY,int toX) {
-
+    /**
+     * Permet d'effectuer visuellement la prise en passant
+     *
+     * @param fromY     Départ Y
+     * @param toX       Destination X
+     */
+    private void enPassant (int fromY,int toX) {
 
         plateau[toX][fromY].removePiece();
         view.removePiece(toX,fromY);
 
     }
 
-
-
+    /**
+     * Permet d'effectuer la promotion d'un pion
+     * @param p         La piece a promouvoir
+     */
     private void promouvoir(Pieces p) {
 
+        // Les nouvelles pieces possibles
         Pieces dame = new Dame(p.getCouleur());
         Pieces cavalier = new Cavaliers(p.getCouleur());
         Pieces tour = new Tours(p.getCouleur());
         Pieces fou = new Fous(p.getCouleur());
 
+        // Coordonnees de la case sur laquelle a lieu la promotion
         int x,y;
-
         x = p.getX();
         y = p.getY();
 
         Pieces pieceSelectionee = view.askUser("Promotion", "Choisir une pièce pour la promotion",dame,cavalier,tour,fou);
 
+        // On effectue la promotion du pion
         plateau[x][y].removePiece();
         plateau[x][y].addPiece(pieceSelectionee);
         view.removePiece(x, y);
         view.putPiece(pieceSelectionee.getType(), pieceSelectionee.getCouleur(), pieceSelectionee.getX(), pieceSelectionee.getY());
     }
 
+    /**
+     * Permet d'effectuer les deux roques
+     * @param roi       Le roi qui va effectuer le roque
+     * @param roque     Différentie le petit et le grand roque
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @return Vrai si le roque c'est effectué correctement, sinon faux
+     */
     boolean roquer(Roi roi, TypeMouvement roque, int toX, int toY){
+
         Case roiNext;
         Case roiFrom = plateau[roi.getX()][roi.getY()];
 
         Case tourFrom;
         Case tourTo;
 
-
+        // On récupère la case se trouvant a cote du roi
         if (roque == TypeMouvement.PETIT_ROQUE){
             roiNext = plateau[roi.getX() + 1][roi.getY()];
         }
@@ -172,12 +203,14 @@ public class Plateau implements ChessController {
             roiNext = plateau[roi.getX() - 1][roi.getY()];
         }
 
-        Case roiTo= plateau[toX][toY];
+        Case roiTo = plateau[toX][toY];
 
+        // Le roque est interdit si le roi est en echec
         if (echec){
             return false;
         }
 
+        // On déplace le roi d'une case et contrôle si il est en echec
         roiFrom.removePiece();
         roiNext.addPiece(roi);
         if(Echec(couleurAdversaire((roi.getCouleur())))){
@@ -186,6 +219,7 @@ public class Plateau implements ChessController {
             return false;
         }
 
+        // On déplace finalement le roi à la case de destination et on controle si il est en echec
         roiNext.removePiece();
         roiTo.addPiece(roi);
         if(Echec(couleurAdversaire((roi.getCouleur())))){
@@ -194,6 +228,7 @@ public class Plateau implements ChessController {
             return false;
         }
 
+        // On applique les changement sur l'interface graphique
         view.putPiece(roi.getType(),roi.getCouleur(),roiTo.getX(),roiTo.getY());
         view.removePiece(roiFrom.getX(),roiFrom.getY());
 
@@ -206,6 +241,7 @@ public class Plateau implements ChessController {
             tourTo = plateau[roi.getX() + 1][roi.getY()];
         }
 
+        // On place la tour sur ça nouvelle case
         Pieces tour = tourFrom.getPiece();
         tourFrom.removePiece();
         view.removePiece(tourFrom.getX(),tourFrom.getY());
@@ -213,6 +249,7 @@ public class Plateau implements ChessController {
         tourTo.addPiece(tour);
         view.putPiece(tour.getType(),tour.getCouleur(),tour.getX(),tour.getY());
 
+        // Si notre roque met le roi adverse en echec, on affiche le message
         if(Echec((roi.getCouleur()))){
             view.displayMessage("Echec");
         }
@@ -226,7 +263,11 @@ public class Plateau implements ChessController {
         return true;
     }
 
-
+    /**
+     * Permet de définir si le roi est en echec
+     * @param couleurAdversaire     La couleur de notre adversaire
+     * @return Vrai si le roi est en echec, sinon faux
+     */
     boolean Echec(PlayerColor couleurAdversaire){
         Pieces roi;
         if (couleurAdversaire == PlayerColor.WHITE){
@@ -235,6 +276,8 @@ public class Plateau implements ChessController {
         else {
             roi = roiBlanc;
         }
+
+        // On parcour le plateau a la recherche d'une piece qui peut manger le roi
         for(int i = 0; i < dimension; i++){
             for(int j = 0; j < dimension; j++){
                 Case caseActuelle = plateau[i][j];
@@ -252,6 +295,11 @@ public class Plateau implements ChessController {
         return echec;
     }
 
+    /**
+     * Permet de recupere la couleur de notre adversaire
+     * @param couleur       Notre couleur
+     * @return La couleur de notre adversaire
+     */
     PlayerColor couleurAdversaire(PlayerColor couleur){
         if (couleur == PlayerColor.WHITE){
             return PlayerColor.BLACK;
@@ -265,6 +313,7 @@ public class Plateau implements ChessController {
         tour = 1;
         echec = false;
 
+        // On vide l'echiquier
         for (int col = 0; col < dimension; ++col) {
             for (int row = 0; row < dimension; ++row) {
                 Case caseCourrante = plateau[col][row];
@@ -274,6 +323,7 @@ public class Plateau implements ChessController {
             }
         }
 
+        // On Cree les pieces puis on les poses sur le plateau
         roiBlanc = new Roi(PlayerColor.WHITE);
         roiNoir = new Roi(PlayerColor.BLACK);
 

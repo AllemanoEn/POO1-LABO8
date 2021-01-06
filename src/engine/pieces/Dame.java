@@ -11,6 +11,12 @@ import chess.PlayerColor;
 import engine.mouvements.*;
 
 public class Dame extends Pieces {
+
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Dame(PlayerColor couleur) {
         super(couleur, PieceType.QUEEN, 7, new Mouvements[]{
                 new Horizontal(Direction.DROITE),

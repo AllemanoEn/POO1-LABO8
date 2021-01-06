@@ -21,8 +21,14 @@ public abstract class Pieces implements ChessView.UserChoice {
     Mouvements[] mouvements;
     int dernierTourDeplace;
 
-
-
+    /**
+     * Constructeur
+     *
+     * @param couleur       La couleur de la piece
+     * @param type          Le type de la piece
+     * @param distance      La distance que la piece peut parcourir
+     * @param mouvements    Tous les mouvements que la piece peut effectuer
+     */
     public Pieces (PlayerColor couleur, PieceType type, int distance, Mouvements[] mouvements){
         this.couleur = couleur;
         this.type = type;
@@ -36,6 +42,15 @@ public abstract class Pieces implements ChessView.UserChoice {
 
     }
 
+    /**
+     * Controle si un mouvement est valide
+     *
+     * @param plateau       Le plateau
+     * @param toX           Destination X
+     * @param toY           Destination Y
+     * @param tour          Numéro du tour
+     * @return Un TypeMouvement catégorisant le mouvement tester
+     */
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour){
 
 
@@ -56,6 +71,7 @@ public abstract class Pieces implements ChessView.UserChoice {
         return TypeMouvement.INTERDIT;
     }
 
+    // Fonction get
     public PlayerColor getCouleur(){
         return couleur;
     }
@@ -80,6 +96,7 @@ public abstract class Pieces implements ChessView.UserChoice {
         return c.getY();
     }
 
+    // Fonction set
     public void setCase(Case c){
         this.c = c;
     }

@@ -14,6 +14,11 @@ public class Tours extends Pieces {
 
     boolean firstMove = true;
 
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Tours(PlayerColor couleur) {
         super(couleur, PieceType.ROOK, 7, new Mouvements[]{
                 new Horizontal(Direction.DROITE),
@@ -23,15 +28,17 @@ public class Tours extends Pieces {
         });
     }
 
-    public String toString(){
-        return "Tours";
-    }
-
+    // Fonction get
     public boolean getFirstMove(){
         return firstMove;
     }
 
+    // Fonction set
     public void setFirstMoveFalse(){
         firstMove = false;
+    }
+
+    public String toString(){
+        return "Tours";
     }
 }

@@ -14,6 +14,11 @@ import engine.mouvements.Mouvements;
 
 public class Fous extends Pieces {
 
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Fous(PlayerColor couleur) {
         super(couleur, PieceType.BISHOP, 7, new Mouvements[]{new Diagonale(Direction.BAS_DROITE),
                 new Diagonale(Direction.BAS_GAUCHE),

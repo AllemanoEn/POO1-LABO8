@@ -15,6 +15,11 @@ public class Roi extends Pieces {
 
     boolean firstMove = true;
 
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Roi(PlayerColor couleur) {
         super(couleur, PieceType.KING, 1, new Mouvements[]{
                 new Horizontal(Direction.DROITE),
@@ -28,6 +33,15 @@ public class Roi extends Pieces {
         });
     }
 
+    /**
+     * Controle si un mouvement est valide
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @param tour      Numéro du tour
+     * @return Un TypeMouvement catégorisant le mouvement tester
+     */
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour) {
 
         TypeMouvement mouvement = super.mouvementValide(plateau, toX, toY, tour);
@@ -42,6 +56,14 @@ public class Roi extends Pieces {
         return mouvement;
     }
 
+    /**
+     * Controle si le roque est possible
+     *
+     * @param plateau       Le plateau
+     * @param c             case de la tour
+     * @param mouvements    déplacement a effectuer
+     * @return Vrai si le roque est possible, sinon faux
+     */
     boolean roque(Case[][] plateau, Case c, Mouvements mouvements){
         if (c.isEmpty() || c.getPiece().getType() != PieceType.ROOK){
             return false;
@@ -56,6 +78,14 @@ public class Roi extends Pieces {
         return mouvements.TrajectoireLibre(plateau,getX(),getY(),c.getX(),c.getY(),8,getCouleur());
     }
 
+    /**
+     * Controle si le petit roque est possible
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @return Vrai si il est possible de faire le petit roque, sinon faux
+     */
     boolean petitRoque(Case[][] plateau, int toX, int  toY){
         if (!getFirstMove() || (toX !=6 || toY != getY())){
             return false;
@@ -66,6 +96,14 @@ public class Roi extends Pieces {
         return roque(plateau, tour, droite);
     }
 
+    /**
+     * Controle si le grand roque est possible
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @return Vrai si il est possible de faire le grand roque, sinon faux
+     */
     boolean grandRoque(Case[][] plateau, int toX, int  toY){
         if (!getFirstMove() || (toX !=3 && toY != getY())){
             return false;
@@ -76,17 +114,18 @@ public class Roi extends Pieces {
         return roque(plateau, tour, gauche);
     }
 
-
-
-    public String toString(){
-        return "Roi";
-    }
+    // Fonction get
     public boolean getFirstMove(){
         return firstMove;
     }
 
+    // Fonction set
     public void setFirstMoveFalse(){
         firstMove = false;
+    }
+
+    public String toString(){
+        return "Roi";
     }
 
 }

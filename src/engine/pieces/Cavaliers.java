@@ -13,11 +13,24 @@ import engine.mouvements.Mouvements;
 
 public class Cavaliers extends Pieces {
 
+    /**
+     * Constructeur
+     *
+     * @param couleur   La couleur de la piece
+     */
     public Cavaliers(PlayerColor couleur) {
         super(couleur, PieceType.KNIGHT, 3, new Mouvements[0]);
     }
 
-
+    /**
+     * Controle si un mouvement est valide
+     *
+     * @param plateau   Le plateau
+     * @param toX       Destination X
+     * @param toY       Destination Y
+     * @param tour      Numéro du tour
+     * @return Un TypeMouvement catégorisant le mouvement tester
+     */
     public TypeMouvement mouvementValide(Case[][] plateau, int toX, int toY, int tour){
 
         int xDeplacement = getX() - toX;
