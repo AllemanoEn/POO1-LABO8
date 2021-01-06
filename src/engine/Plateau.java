@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Pions.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Déclare la classe plateau et contrôle le déroulement de la partie
+ * Date     : 06.01.2021
+ */
 package engine;
 
 

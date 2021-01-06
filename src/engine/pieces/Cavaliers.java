@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Cavaliers.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Crée la pièce cavalier
+ * Date     : 06.01.2021
+ */
 package engine.pieces;
 
 import chess.PieceType;

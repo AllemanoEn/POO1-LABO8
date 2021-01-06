@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Pieces.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Décalre la classe abstraite Pieces
+ * Date     : 06.01.2021
+ */
 package engine.pieces;
 
 import chess.ChessView;

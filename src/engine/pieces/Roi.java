@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Roi.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Crée la pièce roi
+ * Date     : 06.01.2021
+ */
 package engine.pieces;
 
 import chess.PieceType;

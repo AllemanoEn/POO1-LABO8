@@ -1,3 +1,9 @@
+/*
+ * Fichier  : Case.java
+ * Auteurs  : Allemano Enzo, Paulus Yohann
+ * But      : Déclare la classe Case
+ * Date     : 06.01.2021
+ */
 package engine;
 import engine.pieces.Pieces;
 
